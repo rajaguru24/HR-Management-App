@@ -15,7 +15,7 @@ function EmployeeTable({
   const TableRow = ({ employee }) => {
     return <tr>
         <td>
-          <Link to={`/employee/${employee._id}`} className="text-decoration-none">
+          <Link to={`/${employee._id}`} className="text-decoration-none">
             {employee.name}
           </Link>
         </td>

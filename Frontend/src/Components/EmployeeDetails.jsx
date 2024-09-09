@@ -62,7 +62,7 @@ const EmployeeDetails = () => {
           </div>
           <button
             className="btn btn-primary"
-            onClick={() => navigate("/employee")}
+            onClick={() => navigate("/")}
           >
             Back
           </button>
