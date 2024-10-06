@@ -77,7 +77,7 @@ const forgotPassword = async (req, res) => {
   user.resetPasswordExpires = Date.now() + 3600000;
   await user.save();
 
-  const resetLink = `http://localhost:5000/api/user/ResetPassword/${resetToken}`;
+  const resetLink = `http://localhost:5000/api/user/resetpassword/${resetToken}`;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -98,7 +98,7 @@ const forgotPassword = async (req, res) => {
     to: user.email,
     subject: "Password Reset Request",
     html: `<p>You are requesting for password reset...</p>
-           <p> please click this <a href="${resetLink}"> LINK </a> to reset ur password</p>`,
+           <p> please click this <a href="${resetLink}"> RESET LINK </a> to reset ur password</p>`,
   };
 
   transporter.sendMail(message, (error) => {
