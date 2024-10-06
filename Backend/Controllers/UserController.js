@@ -62,7 +62,6 @@ const getuser = async (req, res) => {
   }
 };
 
-
 const forgotPassword = async (req, res) => {
   const { email } = req.body;
   console.log(req.body);
@@ -106,13 +105,10 @@ const forgotPassword = async (req, res) => {
     if (error) {
       res.status(500).json({ message: "Internal Server Error" });
     } else {
-      res
-        .status(200)
-        .json({ message: "Email sent successfully"  });
+      res.status(200).json({ message: "Email sent successfully" });
     }
   });
 };
-
 
 const resetPassword = async (req, res, next) => {
   const { token } = req.params;
@@ -143,8 +139,6 @@ const resetPassword = async (req, res, next) => {
     res.status(500).json({ message: "server error" });
   }
 };
-
-
 
 module.exports = {
   signupUser,

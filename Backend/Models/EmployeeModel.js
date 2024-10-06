@@ -13,22 +13,21 @@ const EmployeeSchema = new Schema({
   department: {
     type: String,
   },
-    profileImage: {
+  profileImage: {
     type: String,
- 
   },
   salary: {
     type: String,
   },
- 
- createdAt: {
+
+  createdAt: {
     type: Date,
-    default: new Date()
+    default: new Date(),
   },
   updatedAt: {
     type: Date,
-    default: new Date()
-  }
+    default: new Date(),
+  },
 });
 const EmployeeModel = mongoose.model("employees", EmployeeSchema);
 module.exports = EmployeeModel;

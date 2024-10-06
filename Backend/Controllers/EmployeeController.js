@@ -1,16 +1,14 @@
 const EmployeeModel = require("../Models/EmployeeModel.js");
-const bcrypt = require("bcrypt")
-const nodemailer=require('nodemailer')
-const crypto=require('crypto')
-const jwt=require('jsonwebtoken')
-
-
+const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 
 const createEmployee = async (req, res) => {
   try {
     const body = req.body;
     console.log(req.body);
-    console.log(req.file, req.file.path)
+    console.log(req.file, req.file.path);
     const profileImage = req?.file ? req?.file?.path : null;
     body.profileImage = profileImage;
     console.log(body);
@@ -18,12 +16,10 @@ const createEmployee = async (req, res) => {
     await emp.save();
     res.status(201).json({
       message: "Employee created successfully",
-
     });
   } catch (err) {
     res.status(500).json({
       message: "Internal server error",
-    
     });
   }
 };
@@ -69,7 +65,6 @@ const getAllEmployees = async (req, res) => {
     res.status(500).json({
       message: "Internal server error",
       success: false,
-      
     });
   }
 };
@@ -81,20 +76,19 @@ const getEmployeeById = async (req, res) => {
     res.status(201).json({
       message: "Get Employee details",
       success: true,
-      data: emp
+      data: emp,
     });
   } catch (err) {
     res.status(500).json({
       message: "Internal server error",
       success: false,
-      
     });
   }
 };
 const deleteEmployeeById = async (req, res) => {
   try {
-    const id  = req.params.id;
-console.log(id);
+    const id = req.params.id;
+    console.log(id);
 
     await EmployeeModel.deleteOne({ _id: id });
     res.status(201).json({
@@ -105,7 +99,7 @@ console.log(id);
     res.status(500).json({
       message: "Internal server error",
       success: false,
-      error:err
+      error: err,
     });
   }
 };
@@ -114,10 +108,9 @@ const updateEmployeeById = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, phone, department, salary } = req.body;
-    console.log(req.body)
+    console.log(req.body);
 
-
-    console.log(req.params)
+    console.log(req.params);
     let updateData = {
       name,
       email,
@@ -126,8 +119,8 @@ const updateEmployeeById = async (req, res) => {
       salary,
       updatedAt: new Date(),
     };
-    console.log(updateData)
-    console.log(req.file)
+    console.log(updateData);
+    console.log(req.file);
     if (req.file) {
       updateData.profileImage = req.file.path;
     }
@@ -136,7 +129,7 @@ const updateEmployeeById = async (req, res) => {
       updateData,
       { new: true }
     );
-    console.log(updateEmployee)
+    console.log(updateEmployee);
     if (!updateEmployee) {
       return res.status(404).json({ message: "Employee not found" });
     }
@@ -146,7 +139,7 @@ const updateEmployeeById = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-    message:"Internal Server error"
+      message: "Internal Server error",
     });
   }
 };
