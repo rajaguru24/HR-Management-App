@@ -4,7 +4,7 @@ import EmployeeDetails from "./Components/EmployeeDetails";
 import Signin from "./Pages/SignIn";
 import Signup from "./Pages/SignUp";
 import Home from "./Pages/Home";
-import OTP from "./Pages/OTP";
+import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/Resetpassword";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from "react";

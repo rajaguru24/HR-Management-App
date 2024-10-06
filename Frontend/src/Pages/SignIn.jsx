@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -36,12 +36,12 @@ const SignIn = ({ setToken }) => {
 
   return (
     <div style={{ backgroundColor: "cyan" }}>
-      <form className="container-fluid text-center " onSubmit={handleSubmit}>
-        <div className="row mb-3">
-          <fieldset>
-            <strong>SignIn</strong>
+      <form className="container-fluid d-flex justify-content-center align-items-center" onSubmit={handleSubmit}>
+        <div className="d-flex justify-content-center"style={{fontSize:"21px"}}>
+          <fieldset><div className="d-flex justify-content-center" style = {{fontSize:"24px"}}><strong>SignIn</strong>
+            </div>
             <p>
-              <label htmlFor="email" className="">
+              <label htmlFor="email" className="col-sm-4">
                 Email
               </label>
               <input
@@ -55,7 +55,7 @@ const SignIn = ({ setToken }) => {
               />
             </p>
             <p>
-              <label htmlFor="Password">Password</label>
+              <label htmlFor="Password"className="col-sm-4">Password</label>
               <input
                 type="password"
                 name="password"
@@ -75,7 +75,7 @@ const SignIn = ({ setToken }) => {
       <br />
       <div className="container-fluid ">
         <button className="d-grid gap-1 col-3 mx-auto">
-          {" "}
+        
           <Link to="/">Back</Link>
         </button>
         <br />

@@ -37,12 +37,12 @@ setTimeout(()=>{
     };
   return (
     <div className=""style={{backgroundColor:"green"}}>
-      <form
-        className="container-fluid d-flex justify-content-center align-items-center" onSubmit={handleSubmit}>
+      <form 
+        className="  container-fluid d-flex justify-content-center align-items-center" onSubmit={handleSubmit}>
         <fieldset>
-          <div className="d-flex justify-content-center p-3"style={{fontSize:"33px"}}><strong>SignUp</strong></div>
+          <div className="d-flex justify-content-center" style = {{fontSize:"24px"}}><strong>SignUp</strong></div>
           <p>
-            <label htmlFor="username" className=""><strong>Username:</strong></label>
+            <label htmlFor="username" className="col-sm-4"><strong>Username:</strong></label>
             <input
               type="text"
               name="username"
@@ -54,7 +54,7 @@ setTimeout(()=>{
             />
           </p>
           <p className="" >
-            <label htmlFor="email" ><strong>Email Id:</strong></label>
+            <label htmlFor="email"className="col-sm-4" ><strong>Email Id:</strong></label>
             <input
               type="email"
               name="email"
@@ -66,7 +66,7 @@ setTimeout(()=>{
             />
           </p>
           <p>
-            <label htmlFor="Password" className=""><strong>Password: </strong></label>
+            <label htmlFor="Password" className="col-sm-4"><strong>Password: </strong></label>
             <input
               type="password"
               name="password"
