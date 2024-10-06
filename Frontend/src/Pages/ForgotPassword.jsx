@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const OTP = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const OTP = () => {
     console.log("hello");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/forgotPassword",
+        "http://localhost:5000/api/user/ForgotPassword",
         { email }
       );
       console.log(response);
@@ -52,4 +52,4 @@ const OTP = () => {
     </div>
   );
 };
-export default OTP;
+export default ForgotPassword;

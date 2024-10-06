@@ -23,49 +23,50 @@ const SignIn = ({ setToken }) => {
        .catch((error) => {
         setMessage(error.data.message);
   });
+  
+      
 
-      setEmail('')
-      setPassword('')
 
       setTimeout(() => {
         navigate("/home");
       }, 1000);
 
-
+      setEmail('');
+      setPassword('');
   };
+  
 
   return (
     <div style={{ backgroundColor: "cyan" }}>
       <form className="container-fluid d-flex justify-content-center align-items-center" onSubmit={handleSubmit}>
-        <div className="d-flex justify-content-center"style={{fontSize:"21px"}}>
+        <div>
           <fieldset><div className="d-flex justify-content-center" style = {{fontSize:"24px"}}><strong>SignIn</strong>
             </div>
-            <p>
-              <label htmlFor="email" className="col-sm-4">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Enter your Email Id"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </p>
-            <p>
-              <label htmlFor="Password"className="col-sm-4">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Enter Your Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </p>
+            <p className="" >
+            <label htmlFor="email"className="col-sm-4" ><strong>Email Id:</strong></label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your Email Id"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </p>
+          <p>
+            <label htmlFor="Password" className="col-sm-4"><strong>Password: </strong></label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter Your Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </p>
+          
             <button className="btn btn-success" type="submit">
               SignIn
             </button>
@@ -80,12 +81,12 @@ const SignIn = ({ setToken }) => {
         </button>
         <br />
         <button className="d-grid gap-2 col-3 mx-auto ">
-          <Link to="/OTP" className="">
+          <Link to="/ForgotPassword" className="">
             Forgot Password
           </Link>
         </button>
       </div>
-      <h2>{message}</h2>
+      <h2 className="d-flex justify-content-center align-items-center">{message}</h2>
     </div>
   );
 };

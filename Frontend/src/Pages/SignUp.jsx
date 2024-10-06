@@ -92,7 +92,7 @@ setTimeout(()=>{
       <br />
 
       <button className="d-grid gap-2 col-3 mx-auto ">
-        <Link to="/OTP" className="">Forgot Password</Link>
+        <Link to="/ForgotPassword" className="">Forgot Password</Link>
       </button>
       </div>
 
