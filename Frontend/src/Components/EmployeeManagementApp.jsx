@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { DeleteEmployeeById, GetAllEmployees } from "../api";
 import AddEmployee from "../Components/AddEmployee";
 import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 import  {notify} from '../utils';
 import 'react-toastify/dist/ReactToastify.css';
 const EmployeeManagementApp=()=> {
@@ -70,12 +71,19 @@ const EmployeeManagementApp=()=> {
             >
               ADD
             </button>
+            <div className="d-flex justify-content-center align-items-center">
             <input
               onChange={handleSearch}
               type="text"
               placeholder="Search Employees"
-              className="form-control w-50"
-            />
+              className=" "
+            /></div>
+         <div className="d-flex justify-content-end align-items-end">
+           <button className="btn btn-danger "  ><Link to="/">Logout</Link> 
+            </button>
+            </div>
+
+         
           </div>
           <EmployeeTable
             employees1={employeeData.employees}
