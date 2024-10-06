@@ -1,4 +1,10 @@
-const EmployeeModel = require("../Models/EmployeeModel");
+const EmployeeModel = require("../Models/EmployeeModel.js");
+const bcrypt = require("bcrypt")
+const nodemailer=require('nodemailer')
+const crypto=require('crypto')
+const jwt=require('jsonwebtoken')
+
+
 
 const createEmployee = async (req, res) => {
   try {

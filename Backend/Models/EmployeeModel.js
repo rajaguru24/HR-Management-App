@@ -13,13 +13,12 @@ const EmployeeSchema = new Schema({
   department: {
     type: String,
   },
-  
-  profileImage: {
+    profileImage: {
     type: String,
  
   },
   salary: {
-    type: Number,
+    type: String,
   },
  
  createdAt: {

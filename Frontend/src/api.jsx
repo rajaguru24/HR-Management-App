@@ -1,6 +1,8 @@
-const BASE_URL = "https://hr-management-app-1.onrender.com";
+
+
+const BASE_URL = "http://localhost:5000"
 export const GetAllEmployees = async (search = "", page = 1, limit = 5) => {
-  const url = `${BASE_URL}/api/employees?search=${search}&page=${page}&limit=${limit}`;
+  const url = `${BASE_URL}/api?search=${search}&page=${page}&limit=${limit}`;
   try {
     const options = {
       method: "GET",
@@ -18,7 +20,7 @@ export const GetAllEmployees = async (search = "", page = 1, limit = 5) => {
 };
 export const GetEmployeeById = async (id) => {
   console.log(id)
-  const url = `${BASE_URL}/api/employees/${id}`;
+  const url = `${BASE_URL}/api/${id}`;
   try {
     const options = {
       method: "GET",
@@ -34,7 +36,7 @@ export const GetEmployeeById = async (id) => {
 };
 
 export const CreateEmployee = async (empObj) => {
-  const url = `${BASE_URL}/api/employees`;
+  const url = `${BASE_URL}/api`;
   try {
     const formData = new FormData();
     for (const key in empObj) {
@@ -55,7 +57,7 @@ export const CreateEmployee = async (empObj) => {
   }
 };
 export const UpdateEmployeeById = async (empObj, id) => {
-  const url = `${BASE_URL}/api/employees/${id}`;
+  const url = `${BASE_URL}/api${id}`;
 
   try {
   const formData = new FormData();
@@ -79,7 +81,7 @@ export const UpdateEmployeeById = async (empObj, id) => {
 };
 export const DeleteEmployeeById = async (id) => {
 
-  const url = `${BASE_URL}/api/employees/${id}`
+  const url = `${BASE_URL}/api${id}`
   try {
       const options = {
     method: "DELETE",

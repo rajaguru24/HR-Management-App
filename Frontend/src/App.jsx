@@ -1,14 +1,26 @@
-import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EmployeeManagementApp from "./Components/EmployeeManagementApp";
 import EmployeeDetails from "./Components/EmployeeDetails";
-
+import Signin from "./Pages/SignIn";
+import Signup from "./Pages/SignUp";
+import Home from "./Pages/Home";
+import OTP from "./Pages/OTP";
+import ResetPassword from "./Pages/Resetpassword";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { useState } from "react";
 function App() {
+
+const[token,setToken]=useState(localStorage.getItem('token')||'')
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Navigate to="employee" />} /> */}
-          <Route path="/" element={<EmployeeManagementApp />} />
+          <Route path="/resetpassword"element={<ResetPassword/>}/>
+          <Route path="/otp" element={<OTP/>}/>
+           <Route path='/signup' element={<Signup/>}/>
+          <Route path="/signin" element={<Signin setToken={setToken}/>}/>
+          <Route path='/' element={<Home/>}/>
+          <Route path="/home" element={<EmployeeManagementApp />} />
           <Route path="/:id" element={<EmployeeDetails />} />
         </Routes>
       </BrowserRouter>

@@ -2,11 +2,11 @@
 import EmployeeTable from "./EmployeeTable";
 import React, { useEffect, useState } from "react";
 import { DeleteEmployeeById, GetAllEmployees } from "../api";
-import AddEmployee from "./AddEmployee";
+import AddEmployee from "../Components/AddEmployee";
 import { ToastContainer } from "react-toastify";
 import  {notify} from '../utils';
 import 'react-toastify/dist/ReactToastify.css';
-function EmployeeManagementApp() {
+const EmployeeManagementApp=()=> {
   const [showModal, setShowModal] = useState(false);
   const [updateEmpObj, setUpdateEmpObj] = useState(null);
   const [employeeData, setEmployeeData] = useState({
@@ -57,7 +57,7 @@ function EmployeeManagementApp() {
         alert("error",err); 
     }
   };
- 
+   
   return (
     <div className="d-flex flex-column justify-content-center align-items-center w-100 p-3">
       <h1>HR ManagementApp</h1>
