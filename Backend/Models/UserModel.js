@@ -6,7 +6,9 @@ const UserSchema = new Schema({
   password: String,
   token: String,
   resetPasswordToken: String,
-  resetPasswordExpires: String 
+  resetPasswordExpires: String,
+  newPassword:String,
+  confirmPassword:String
 });
 const UserModel = mongoose.model("users", UserSchema);
 module.exports = UserModel;

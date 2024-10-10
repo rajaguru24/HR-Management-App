@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     console.log("hello");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/ForgotPassword",
+        "https://hr-management-app-1.onrender.com/api/user/ForgotPassword",
         { email }
       );
       console.log(response);

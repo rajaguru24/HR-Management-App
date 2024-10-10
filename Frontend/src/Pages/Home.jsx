@@ -8,8 +8,8 @@ const Home = () => {
         <Navbar />
       <header>
         <section>
-          <div className=''style={{color:"black"}} >
-            <div className="p-6" style={{backgroundColor:"violet"}}>
+          <div style={{color:"black"}} >
+            <div className="p-6"  style={{backgroundColor:"yellow"}}>
               <h3>
                 <span>HR Managment App</span>
               </h3>

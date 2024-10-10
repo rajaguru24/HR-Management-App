@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-
+  
   const navigate = useNavigate();
   const payload = { email, password };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-  
-    await axios.post("http://localhost:5000/api/user/signin-user", payload)
+    await axios.post("https://hr-management-app-1.onrender.com/api/user/signin-user", payload)
       .then((res) => {
         setMessage(res.data.message);
         setToken(res.data.token);
@@ -23,11 +22,7 @@ const SignIn = ({ setToken }) => {
        .catch((error) => {
         setMessage(error.data.message);
   });
-  
-      
-
-
-      setTimeout(() => {
+        setTimeout(() => {
         navigate("/home");
       }, 1000);
 
@@ -88,7 +83,7 @@ const SignIn = ({ setToken }) => {
           </Link>
         </button>
       </div>
-      <h2 className="d-flex justify-content-center align-items-center">{message}</h2>
+      <ToastContainer />
     </div>
   );
 };

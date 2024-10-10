@@ -72,18 +72,24 @@ const forgotPassword = async (req, res) => {
   }
 
   const resetToken = crypto.randomBytes(32).toString("hex");
-  const hashedToken = await bcrypt.hash(resetToken, 12);
+  let hashedToken = await bcrypt.hash(resetToken, 12);
+  hashedToken = hashedToken
+    .replace(/\//g, "g")
+    .replace(/\+/g, "-")
+    .replace(/=/g, "");
+
   user.resetPasswordToken = hashedToken;
   user.resetPasswordExpires = Date.now() + 3600000;
   await user.save();
 
-  const resetLink = `http://localhost:5000/api/user/resetpassword/${resetToken}`;
+  const resetLink = `https://hr-management-app-chi.vercel.app/resetpassword/${hashedToken}`;
+  console.log(resetLink);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     host: process.env.EMAIL_HOST,
-    port: 465,
     secure: true,
+    port: 465,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -100,7 +106,7 @@ const forgotPassword = async (req, res) => {
     html: `<p>You are requesting for password reset...</p>
            <p> please click this <a href="${resetLink}"> RESET LINK </a> to reset ur password</p>`,
   };
-
+  console.log(message);
   transporter.sendMail(message, (error) => {
     if (error) {
       res.status(500).json({ message: "Internal Server Error" });
@@ -111,32 +117,27 @@ const forgotPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res, next) => {
+  const { newPassword, confirmPassword } = req.body;
   const { token } = req.params;
-  const { password } = req.body;
+  console.log(token);
   console.log(req.body);
-  console.log(req.params);
 
   try {
-    const user = await UserModel.findOne({
-      resetPasswordToken: { $exists: true },
-      resetPasswordExpires: { $gt: Date.now() },
-    });
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ message: "Password Does not match" });
+    }
+    const user = await UserModel.findOne({ resetPasswordToken: token });
     console.log(user);
     if (!user) {
-      return res.status(400).json({ message: "user not registered" });
     }
-    const isTokenValid = await bcrypt.compare(token, user.resetPasswordToken);
-    if (!isTokenValid) {
-      return res.status(400).json({ message: "Invalid token" });
-    }
-    user.password = await bcrypt.hash(password, 12);
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-    await user.save();
 
+    const saltRounds = 10;
+    const hashedNewPassword = await bcrypt.hash(confirmPassword, saltRounds);
+    user.password = hashedNewPassword;
+    await user.save();
     res.status(200).json({ message: "Password has been reset" });
   } catch (error) {
-    res.status(500).json({ message: "server error" });
+    console.log(error);
   }
 };
 
