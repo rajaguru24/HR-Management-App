@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 var cors = require("cors");
 const corsOptions = {
-  origin: 'https://celadon-malasada-d4eb0d.netlify.app/',//(https://your-client-app.com)
+  origin: 'https://celadon-malasada-d4eb0d.netlify.app/resetpassword/:token',//(https://your-client-app.com)
   optionsSuccessStatus: 200,
 };
 
