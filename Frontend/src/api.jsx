@@ -1,6 +1,6 @@
 
 
-const BASE_URL = "https://hr-management-app.onrender.com"
+// const BASE_URL = "https://hr-management-app.onrender.com"
 
 
 export const GetAllEmployees = async (search = "", page = 1, limit = 5) => {
