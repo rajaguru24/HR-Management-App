@@ -16,7 +16,7 @@ const SignUp = () => {
     e.preventDefault();
     
     const payload = { username, email, password };
-    await axios.post("https://hr-management-app-1.onrender.com/api/user/signup-user", payload)
+    await axios.post("https://hr-management-app.onrender.com/api/user/signup-user", payload)
       .then((res) => {
         toast.success(res.data.message)
       })

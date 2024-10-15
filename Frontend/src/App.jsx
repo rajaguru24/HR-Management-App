@@ -5,7 +5,7 @@ import Signin from "./Pages/SignIn";
 import Signup from "./Pages/SignUp";
 import Home from "./Pages/Home";
 import ForgotPassword from "./Pages/ForgotPassword";
-import ResetPassword from "./Pages/Resetpassword";
+import ResetPassword from "./Pages/ResetPassword";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from "react";
 function App() {
