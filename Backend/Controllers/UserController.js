@@ -77,7 +77,7 @@ const forgotPassword = async (req, res) => {
   user.resetPasswordExpires = Date.now() + 3600000;
   await user.save();
 
-  const resetLink = `http://localhost:5000/api/resetpassword:/${hashedToken}`;
+  const resetLink = `https://hr-management-app-wsp1.vercel.app/resetpassword:/${hashedToken}`;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -111,32 +111,30 @@ const forgotPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res, next) => {
-  const {resetLink} = req.body
+  const { resetLink } = req.body;
   const { password1 } = req.body;
   const { password2 } = req.body;
   console.log(password1);
   console.log(password2);
-  
-  if(resetLink){
-  if(error){
-return res.status(401).json({message:"incorrect token or expired"})
-}
-user.findOne({resetLink},(error,user)=>{
-if(error||!user){
-  return res.status(400).json({message:"not a user"})
-}
-const obj={
-  password:password1,password2
-}
 
-})
-  }else{
-    return res.status(400).json({message:"Authentication error"})
+  if (resetLink) {
+    if (error) {
+      return res.status(401).json({ message: "incorrect token or expired" });
+    }
+    user.findOne({ resetLink }, (error, user) => {
+      if (error || !user) {
+        return res.status(400).json({ message: "not a user" });
+      }
+      const obj = {
+        password: password1,
+        password2,
+      };
+    });
+  } else {
+    return res.status(400).json({ message: "Authentication error" });
   }
 
-
-try {
-
+  try {
     const user = await UserModel.findOne({
       resetPasswordToken: { $exists: true },
       resetPasswordExpires: { $gt: Date.now() },
@@ -146,13 +144,12 @@ try {
       return res.status(400).json({ message: "user not registered" });
     }
     await user.findOne({
-      email:req.body.email
-    })
-if(resetLink){
-  const isTokenValid = await bcrypt.compare(token, user.resetPasswordToken);
-}
+      email: req.body.email,
+    });
+    if (resetLink) {
+      const isTokenValid = await bcrypt.compare(token, user.resetPasswordToken);
+    }
 
-    
     if (!isTokenValid) {
       return res.status(400).json({ message: "Invalid token" });
     }

@@ -10,21 +10,21 @@ const SignIn = ({ setToken }) => {
   const [password, setPassword] = useState("");
   
   const navigate = useNavigate();
-  const payload = { email, password };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("https://hr-management-app.onrender.com/api/user/signin-user", payload)
+
+    const payload = { email, password }; 
+     await axios.post("https://hr-management-app.onrender.com/api/user/signin-user", payload)
       .then((res) => {
-        setMessage(res.data.message);
+        toast.success(res.data.message);
         setToken(res.data.token);
       })
        .catch((error) => {
-        setMessage(error.data.message);
+        toast.error(error.data.message);
   });
         setTimeout(() => {
         navigate("/home");
-      }, 1000);
+      }, 2000);
 
       setEmail('');
       setPassword('');
