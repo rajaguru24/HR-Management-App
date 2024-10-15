@@ -4,12 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 
-app.use(cors({
-  origin: 'https://hr-management-app-brown.vercel.app/', // use your actual domain name (or localhost), using * is not recommended
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: "Origin",
-  credentials: true
-}))
+app.use(cors())
 
 const PORT = process.env.PORT || 5000;
 require("./Models/db");
