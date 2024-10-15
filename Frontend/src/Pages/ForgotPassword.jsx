@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     console.log("hello");
     try {
       const response = await axios.post(
-        "https://hr-management-app-brown.vercel.app/api/user/ForgotPassword",
+        "http://localhost:5000",
         { email }
       );
       console.log(response);
