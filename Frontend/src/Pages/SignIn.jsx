@@ -17,7 +17,7 @@ const SignIn = ({ setToken }) => {
      await axios.post("https://hr-management-app.onrender.com/api/user/signin-user", payload)
       .then((res) => {
         toast.success(res.data.message);
-        setToken(res.data.token);
+        toast.Token(res.data.token);
       })
        .catch((error) => {
         toast.error(error.data.message);
