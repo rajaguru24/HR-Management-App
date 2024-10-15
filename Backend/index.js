@@ -4,15 +4,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://celadon-malasada-d4eb0d.netlify.app/",
-    ],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: 'https://hr-management-app-brown.vercel.app/', // use your actual domain name (or localhost), using * is not recommended
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
+  credentials: true
+}))
 
 const PORT = process.env.PORT || 5000;
 require("./Models/db");
