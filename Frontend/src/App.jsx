@@ -15,7 +15,7 @@ const[token,setToken]=useState(localStorage.getItem('token')||'')
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/resetpassword/:token"element={<ResetPassword/>}/>
+          <Route path="/resetpassword/:token" element={<ResetPassword/>}/>
           <Route path="/forgotpassword" element={<ForgotPassword/>}/>
            <Route path='/signup' element={<Signup/>}/>
           <Route path="/signin" element={<Signin setToken={setToken}/>}/>
