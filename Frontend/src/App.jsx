@@ -8,6 +8,7 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from "react";
+import axios from "axios";
 axios.defaults.withCredentials=true;
 function App() {
 
