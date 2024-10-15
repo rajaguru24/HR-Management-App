@@ -4,7 +4,12 @@ const bodyParser = require("body-parser");
 
 require("dotenv").config();
 var cors = require("cors");
-app.use(cors());
+const corsOptions = {
+  origin: 'https://celadon-malasada-d4eb0d.netlify.app/',//(https://your-client-app.com)
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 5000;
 require("./Models/db");
