@@ -17,10 +17,10 @@ const SignIn = ({ setToken }) => {
      await axios.post("https://hr-management-app.onrender.com/api/user/signin-user", payload)
       .then((res) => {
         toast.success(res.data.message);
-        toast.Token(res.data.token);
+        setToken(res.data.token)
       })
        .catch((error) => {
-        toast.error(error.data.message);
+        toast.error(error?.data?.message);
   });
         setTimeout(() => {
         navigate("/home");
