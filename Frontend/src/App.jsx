@@ -6,22 +6,21 @@ import Signup from "./Pages/SignUp";
 import Home from "./Pages/Home";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import axios from "axios";
-axios.defaults.withCredentials=true;
+axios.defaults.withCredentials = true;
 function App() {
-
-const[token,setToken]=useState(localStorage.getItem('token')||'')
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/resetpassword/:token" element={<ResetPassword/>}/>
-          <Route path="/forgotpassword" element={<ForgotPassword/>}/>
-           <Route path='/signup' element={<Signup/>}/>
-          <Route path="/signin" element={<Signin setToken={setToken}/>}/>
-          <Route path='/' element={<Home/>}/>
+          <Route path="/resetpassword/:token" element={<ForgotPassword />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin setToken={setToken} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<EmployeeManagementApp />} />
           <Route path="/:id" element={<EmployeeDetails />} />
         </Routes>
