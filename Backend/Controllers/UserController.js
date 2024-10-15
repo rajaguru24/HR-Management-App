@@ -77,7 +77,7 @@ const forgotPassword = async (req, res) => {
   user.resetPasswordExpires = Date.now() + 3600000;
   await user.save();
 
-  const resetLink = `https://vercel.com/rajagurus-projects-b22815d9/resetpassword/:${hashedToken}`;
+  const resetLink = `https://hr-management-app-brown.vercel.app/resetpassword/:${hashedToken}`;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
