@@ -14,7 +14,7 @@ const SignIn = ({ setToken }) => {
     e.preventDefault();
 
     const payload = { email, password }; 
-     await axios.post("https://hr-management-app.onrender.com/api/user/signin-user", payload)
+     await axios.post("/api/user/signin-user", payload)
       .then((res) => {
         toast.success(res.data.message);
         setToken(res.data.token)
