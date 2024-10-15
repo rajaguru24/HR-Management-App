@@ -8,6 +8,7 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from "react";
+axios.defaults.withCredentials=true;
 function App() {
 
 const[token,setToken]=useState(localStorage.getItem('token')||'')
