@@ -77,7 +77,7 @@ const SignIn = ({ setToken }) => {
           <Link to="/">Back</Link>
         </button>
         <br />
-        <button className="d-grid gap-2 col-3 mx-auto ">
+        <button className="d-grid gap-2 col-3 mx-auto container-fluid">
           <Link to="/forgotpassword" className="">
             Forgot Password
           </Link>
