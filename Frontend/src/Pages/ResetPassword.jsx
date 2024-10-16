@@ -30,7 +30,6 @@ const ResetPassword = () => {
         navigate("/signin")
       }, 3000)
       
-
     } catch (error) {
       toast.error(error.response.data.message);
     }
