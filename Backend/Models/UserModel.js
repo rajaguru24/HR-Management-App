@@ -7,8 +7,7 @@ const UserSchema = new Schema({
   token: String,
   resetPasswordToken: String,
   resetPasswordExpires: String,
-  newPassword:String,
-  confirmPassword:String
+  
 });
 const UserModel = mongoose.model("users", UserSchema);
 module.exports = UserModel;

@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const { toNamespacedPath } = require("path");
 
 const signupUser = async (req, res) => {
   try {
@@ -71,13 +72,14 @@ const forgotPassword = async (req, res) => {
     return res.status(404).json({ message: "user not registered" });
   }
 
-  const resetToken = crypto.randomBytes(32).toString("hex");
-  const hashedToken = await bcrypt.hash(resetToken, 12);
-  user.resetPasswordToken = hashedToken;
+  const tokenString = crypto.randomBytes(32).toString("hex");
+  const hashedToken = await bcrypt.hash(tokenString, 12);
+  const resetToken = hashedToken.split("/")[0];
+  user.resetPasswordToken = resetToken;
   user.resetPasswordExpires = Date.now() + 3600000;
   await user.save();
 
-  const resetLink = `https://hr-management-app-brown.vercel.app/resetpassword/:${hashedToken}`;
+  const resetLink = `http://localhost:5173/resetpassword/${resetToken}`;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -111,55 +113,32 @@ const forgotPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res, next) => {
-  const { resetLink } = req.body;
-  const { password1 } = req.body;
-  const { password2 } = req.body;
-  console.log(password1);
-  console.log(password2);
-
-  if (resetLink) {
-    if (error) {
-      return res.status(401).json({ message: "incorrect token or expired" });
-    }
-    user.findOne({ resetLink }, (error, user) => {
-      if (error || !user) {
-        return res.status(400).json({ message: "not a user" });
-      }
-      const obj = {
-        password: password1,
-        password2,
-      };
-    });
-  } else {
-    return res.status(400).json({ message: "Authentication error" });
-  }
+  const { resetToken } = req.params;
+  const { newPassword } = req.body;
+  const { confirmPassword } = req.body;
 
   try {
+    if (newPassword == "" || confirmPassword == "") {
+      return res.status(400).json({ message: "Please enter the password " });
+    }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ message: "Password does not match" });
+    }
     const user = await UserModel.findOne({
-      resetPasswordToken: { $exists: true },
+      resetPasswordToken: resetToken,
       resetPasswordExpires: { $gt: Date.now() },
     });
-    console.log(user);
     if (!user) {
-      return res.status(400).json({ message: "user not registered" });
+      return res.status(400).json({ message: "Token expired" });
     }
-    await user.findOne({
-      email: req.body.email,
-    });
-    if (resetLink) {
-      const isTokenValid = await bcrypt.compare(token, user.resetPasswordToken);
-    }
-
-    if (!isTokenValid) {
-      return res.status(400).json({ message: "Invalid token" });
-    }
-
-    user.password = await bcrypt.hash(password, 12);
+    const hashedNewPassword =  await bcrypt.hash(newPassword, 10);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
+    user.password = hashedNewPassword;
+    await user.save();
     res.status(200).json({ message: "Password has been reset" });
   } catch (error) {
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -170,3 +149,45 @@ module.exports = {
   forgotPassword,
   getuser,
 };
+
+// if (resetToken) {
+//   if (!resetToken) {
+//     return res.status(401).json({ message: "incorrect token or expired" });
+//   }
+//   user.findOne({ resetToken }, (error, user) => {
+//     if (error || !user) {
+//       return res.status(400).json({ message: "not a user" });
+//     }
+//     const obj = {
+//       password: password1,
+//       confirmPassword,
+//     };
+//   });
+// } else {
+//   return res.status(400).json({ message: "Authentication error" });
+// }
+
+// try {
+//   const user = await UserModel.findOne({
+//     resetPasswordToken: { $exists: true },
+//     resetPasswordExpires: { $gt: Date.now() },
+//   });
+//   console.log(user);
+//   if (!user) {
+//     return res.status(400).json({ message: "user not registered" });
+//   }
+//   await user.findOne({
+//     email: req.body.email,
+//   });
+//   if (resetLink) {
+//     const isTokenValid = await bcrypt.compare(token, user.resetPasswordToken);
+//   }
+
+//   if (!isTokenValid) {
+//     return res.status(400).json({ message: "Invalid token" });
+//   }
+
+//   user.password = await bcrypt.hash(password, 12);
+//   user.resetPasswordToken = undefined;
+//   user.resetPasswordExpires = undefined;
+//   res.status(200).json({ message: "Password has been reset" });

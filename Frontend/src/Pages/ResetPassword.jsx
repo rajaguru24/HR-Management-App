@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ResetPassword = () => {
-  const { token } = useParams();
+  const { resetToken } = useParams();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
@@ -14,18 +14,23 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setNewPassword("");
-    setConfirmPassword("");
-
-  
-
     try {
       const response = await axios.post(
-        `/api/user/resetpassword/${token}`,
+        `http://localhost:5000/api/user/resetpassword/${resetToken}`,
         { newPassword, confirmPassword }
       );
 
+      if (!response) {
+        toast.error("Server error");
+      }
       toast.success(response.data.message);
+      setNewPassword("");
+      setConfirmPassword("");
+      setTimeout(() => {
+        navigate("/signin")
+      }, 3000)
+      
+
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -72,10 +77,9 @@ const ResetPassword = () => {
         </form>
       </div>
       <br />
-      
+
       <ToastContainer />
     </div>
-    
   );
 };
 export default ResetPassword;
