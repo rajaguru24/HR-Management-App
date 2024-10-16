@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,9 +16,9 @@ const ForgotPassword = () => {
         { email }
       );
       console.log(response);
-      setMessage(response.data.message);
+      toast.success(response.data.message);
     } catch (error) {
-      setMessage("error sending password reset link");
+      toast.error("error sending password reset link");
 
       setTimeout(() => {
         navigate("/signin");
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
             send
           </button>
         </form>
-        {message && <p>{message}</p>}
+        <ToastContainer />
       </div>
     </div>
   );

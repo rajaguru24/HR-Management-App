@@ -24,7 +24,7 @@ const SignIn = ({ setToken }) => {
   });
         setTimeout(() => {
         navigate("/home");
-      }, 2000);
+      }, 3000);
 
       setEmail('');
       setPassword('');
