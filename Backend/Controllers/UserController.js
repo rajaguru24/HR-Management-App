@@ -77,9 +77,10 @@ const forgotPassword = async (req, res) => {
   const resetToken = hashedToken.split("/")[0];
   user.resetPasswordToken = resetToken;
   user.resetPasswordExpires = Date.now() + 3600000;
+
   await user.save();
 
-  const resetLink = `http://localhost:5173/resetpassword/${resetToken}`;
+  const resetLink = `https://celadon-malasada-d4eb0d.netlify.app/resetpassword/${resetToken}`;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -150,44 +151,3 @@ module.exports = {
   getuser,
 };
 
-// if (resetToken) {
-//   if (!resetToken) {
-//     return res.status(401).json({ message: "incorrect token or expired" });
-//   }
-//   user.findOne({ resetToken }, (error, user) => {
-//     if (error || !user) {
-//       return res.status(400).json({ message: "not a user" });
-//     }
-//     const obj = {
-//       password: password1,
-//       confirmPassword,
-//     };
-//   });
-// } else {
-//   return res.status(400).json({ message: "Authentication error" });
-// }
-
-// try {
-//   const user = await UserModel.findOne({
-//     resetPasswordToken: { $exists: true },
-//     resetPasswordExpires: { $gt: Date.now() },
-//   });
-//   console.log(user);
-//   if (!user) {
-//     return res.status(400).json({ message: "user not registered" });
-//   }
-//   await user.findOne({
-//     email: req.body.email,
-//   });
-//   if (resetLink) {
-//     const isTokenValid = await bcrypt.compare(token, user.resetPasswordToken);
-//   }
-
-//   if (!isTokenValid) {
-//     return res.status(400).json({ message: "Invalid token" });
-//   }
-
-//   user.password = await bcrypt.hash(password, 12);
-//   user.resetPasswordToken = undefined;
-//   user.resetPasswordExpires = undefined;
-//   res.status(200).json({ message: "Password has been reset" });

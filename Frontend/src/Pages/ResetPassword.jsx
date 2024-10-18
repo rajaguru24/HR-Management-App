@@ -16,7 +16,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/user/resetpassword/${resetToken}`,
+        `https://hr-management-app.onrender.com/api/user/resetpassword/${resetToken}`,
         { newPassword, confirmPassword }
       );
 

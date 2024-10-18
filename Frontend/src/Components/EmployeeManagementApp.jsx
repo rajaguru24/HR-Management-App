@@ -50,9 +50,9 @@ const EmployeeManagementApp=()=> {
     try {
       const { success, message } = await DeleteEmployeeById(emp);
       if (success) {
-        notify(message, "success");
+        toast.success(message, "success");
       } else {
-        notify(message, "err");
+        toast.error(message, "err");
        }
     } catch (err) {
         alert("error",err); 
@@ -104,11 +104,7 @@ const EmployeeManagementApp=()=> {
         </div>
       </div>
 {      
-        <ToastContainer
-          postion="top-right"
-          autoclose={3000}
-          hideProgressBar={false}
-        />
+        <ToastContainer/>
 }     
     </div>
   );
