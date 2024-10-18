@@ -37,7 +37,7 @@ const EmployeeManagementApp=()=> {
   const handleAddEmployee = () => {
     setShowModal(true);
   };
-  const handleUpdateEmployee =async(emp ) => {
+  const handleUpdateEmployee =async(empObj  ) => {
     setUpdateEmpObj(empObj);
     setShowModal(true);
   };
