@@ -55,7 +55,7 @@ export const CreateEmployee = async (empObj) => {
   }
 };
 export const UpdateEmployeeById = async (empObj, id) => {
-  const url = `${BASE_URL}/api${id}`;
+  const url = `${BASE_URL}/api/${id}`;
 
   try {
     const formData = new FormData();
@@ -77,7 +77,7 @@ export const UpdateEmployeeById = async (empObj, id) => {
   }
 };
 export const DeleteEmployeeById = async (id) => {
-  const url = `${BASE_URL}/api${id}`;
+  const url = `${BASE_URL}/api/${id}`;
   try {
     const options = {
       method: "DELETE",
